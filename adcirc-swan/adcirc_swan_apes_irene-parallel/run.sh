@@ -1,5 +1,7 @@
 #!/bin/bash
 
+JOBLAUNCHER=${JOBLAUNCHER:-"mpirun --allow-run-as-root"}
+
 case_name="adcirc_swan_apes_irene-parallel"
 
 #...Check on what is provided
@@ -38,7 +40,7 @@ else
 fi
 
 echo -n "    Runnning case..."
-mpirun --allow-run-as-root -np $np $exepath/padcswan > padcswan_log.txt
+${JOBLAUNCHER} -np $np $exepath/padcswan > padcswan_log.txt
 exitstat=$?
 echo "Finished"
 echo "    ADCIRC Exit Code: $exitstat"

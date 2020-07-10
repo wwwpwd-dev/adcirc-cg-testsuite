@@ -1,5 +1,7 @@
 #!/bin/bash
 
+JOBLAUNCHER=${JOBLAUNCHER:-"mpirun --allow-run-as-root"}
+
 case_name="quarter_annular-2d-parallel-netcdf-hotstart"
 
 #...Check on what is provided
@@ -37,7 +39,7 @@ else
 fi
 
 echo -n "    Runnning cold start..."
-mpirun --allow-run-as-root -np $np $exepath/padcirc > padcirc_log.txt
+${JOBLAUNCHER} -np $np $exepath/padcirc > padcirc_log.txt
 exitstat=$?
 echo "Finished"
 echo "    PADCIRC Exit Code: $exitstat"
@@ -100,7 +102,7 @@ else
     exit 1
 fi
 echo -n "    Runnning hot start..."
-mpirun --allow-run-as-root -np $np $exepath/padcirc > padcirc_log.txt
+${JOBLAUNCHER} -np $np $exepath/padcirc > padcirc_log.txt
 exitstat=$?
 echo "Finished"
 echo "    PADCIRC Exit Code: $exitstat"
